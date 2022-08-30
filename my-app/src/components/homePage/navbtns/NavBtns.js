@@ -9,25 +9,27 @@ const useStyles = createUseStyles(() => {
       height: "20%",
       alignItems: "center",
       display: "flex",
-      justifyContent: 'space-around'
+      justifyContent: "space-around",
     },
     icon: {
       alignItems: "center",
       display: "flex",
       color: "white",
-      fontFamily: 'fantazy',
-      fontSize: 30
+      fontFamily: "fantazy",
+      fontSize: 30,
     },
     btns: {
       color: "white",
-      justifyContent: 'space-between',
-      display: 'flex'
-
+      justifyContent: "space-between",
+      display: "flex",
+      width: '30%'
     },
     contact: {
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center'
+      color: "white",
+      display: "flex",
+      width: '9%',
+      alignItems: "center",
+      justifyContent: 'space-between'
     },
   };
 });
@@ -39,7 +41,7 @@ function NavBtns(params) {
     <div className={classes.main}>
       <div className={classes.icon}>
         <Diamond />
-        <span>Platform</span>
+        <span style={{ marginLeft: "5%" }}>Platform</span>
       </div>
       <div className={classes.btns}>
         <span>HOME</span>
@@ -53,8 +55,7 @@ function NavBtns(params) {
         <GitHubIcon />
         <TwitterIcon />
       </div>
-      <div>
-      </div>
+      <div></div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { Button, Input, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { createUseStyles } from "react-jss";
 import SendIcon from "@mui/icons-material/Send";
 import { useContext, useState } from "react";
@@ -9,7 +9,6 @@ const useStyles = createUseStyles(() => {
     main: {
       height: "50%",
       width: "60%",
-      border: "1px solid black",
       marginLeft: "2%",
       marginTop: "2%",
       display: "flex",
@@ -21,7 +20,7 @@ const useStyles = createUseStyles(() => {
       justifyContent: "space-between",
     },
     tittle: {
-      fontFamily: "fantasy",
+      fontFamily: "cursive",
       fontSize: 30,
     },
   };
@@ -29,15 +28,16 @@ const useStyles = createUseStyles(() => {
 
 function AddTractors() {
   const classes = useStyles();
-  const [driver, setDriver] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
+  const [tractorName, setTractorName] = useState("");
+  const [make, setMake] = useState("");
+  const [model, setModel] = useState("");
+  const [vin, setVin] = useState("");
+  const [year, setYear] = useState("");
+
   const user = useContext(UserAuth);
 
-
   const addDriver = (data) => {
-    fetch("http://10.20.8.158:5002/api/v2/accounts/add/driver", {
+    fetch("http://10.20.8.158:5002/api/v2/tractors/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -47,10 +47,6 @@ function AddTractors() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
-        setDriver('');
-        setPhone('');
-        setPhone('');
-        setPassword('');
       });
   };
 
@@ -62,48 +58,57 @@ function AddTractors() {
           id="Tractor Name          "
           label="Tractor Name
           "
+          style={{ width: "30%" }}
           type="text"
-          value={driver}
-          onChange={(e) => setDriver(e.target.value)}
+          value={tractorName}
+          onChange={(e) => setTractorName(e.target.value)}
         />
         <TextField
           id="Make"
           label="Make"
+          style={{ width: "30%" }}
           type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={make}
+          onChange={(e) => setMake(e.target.value)}
         />
         <TextField
           id="Model"
-          label="Model"
+          label="Model *"
+          style={{ width: "30%" }}
           type="text"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          value={model}
+          onChange={(e) => setModel(e.target.value)}
         />
       </div>
+      <div style={{display: 'flex',justifyContent: 'space-around'}}>
       <TextField
-        style={{ width: "28%" }}
         id="password1"
         label="Vin"
+        style={{width: '30%'}}
         type="Vin"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        value={vin}
+        onChange={(e) => setVin(e.target.value)}
       />
       <TextField
-          id="email1"
-          label="Year"
-          type="year"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        id="email1"
+        label="Year"
+        style={{ width: "30%" }}
+        type="year"
+        value={year}
+        onChange={(e) => setYear(e.target.value)}
+      />
+      </div>
       <Button
         onClick={() => {
           addDriver({
-            email: email,
-            password: password,
-            name: driver,
-            dot: user?.account.dot,
-            phone: phone,
+            id: user?.account.id,
+            dot: user?.account.id,
+            vin: vin,
+            name: tractorName,
+            make: make,
+            model: model,
+            year: year,
+            status: "Available",
             organizationId: user?.account.organizationId,
           });
         }}
@@ -116,6 +121,4 @@ function AddTractors() {
   );
 }
 
-
-
-export default AddTractors
+export default AddTractors;

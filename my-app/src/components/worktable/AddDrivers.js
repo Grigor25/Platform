@@ -1,4 +1,4 @@
-import { Button, Input, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { createUseStyles } from "react-jss";
 import SendIcon from "@mui/icons-material/Send";
 import { useContext, useState } from "react";
@@ -9,7 +9,6 @@ const useStyles = createUseStyles(() => {
     main: {
       height: "50%",
       width: "60%",
-      border: "1px solid black",
       marginLeft: "2%",
       marginTop: "2%",
       display: "flex",
@@ -21,7 +20,7 @@ const useStyles = createUseStyles(() => {
       justifyContent: "space-between",
     },
     tittle: {
-      fontFamily: "fantasy",
+      fontFamily: "cursive",
       fontSize: 30,
     },
   };
@@ -49,7 +48,7 @@ function AddDrivers() {
         console.log("Success:", data);
         setDriver('');
         setPhone('');
-        setPhone('');
+        setEmail('');
         setPassword('');
       });
   };

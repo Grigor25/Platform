@@ -1,5 +1,7 @@
+import DriversTable from "./DriversTable"
+
 function Drivers(){
-    return <div>Drivers</div>
+    return <DriversTable />
 }
 
 export default Drivers

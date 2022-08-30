@@ -38,7 +38,7 @@ function Boards(){
     return <div className={classes.main}>
     <div className={classes.card}>
         <h1 style={{fontFamily: 'cursive'}}>Find Loads</h1>
-        <Button variant="contained" endIcon={<SendIcon />}>
+        <Button  onClick={() => loadBoards()} variant="contained" endIcon={<SendIcon />}>
         Reflesh
       </Button>
       <StickyHeadTable rows={rows}/>

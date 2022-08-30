@@ -1,16 +1,23 @@
 import { Button, TextField } from "@mui/material";
 import { createUseStyles } from "react-jss";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Diamond from "../navbtns/Diamond";
 import { useEffect, useState } from "react";
+import paths from "../../../constants/paths";
 
 const useStyles = createUseStyles(() => {
   return {
     form: {
+      height: "70vh",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      justifyContent: "space-around",
+      justifyContent: "space-between",
+    },
+    icon: {
+      fontSize: "40px",
+      marginTop: "5%",
+      alignItems: 'center'
     },
   };
 });
@@ -22,7 +29,8 @@ function SignInForm(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [id, setId] = useState("");
-  const {user} = props;
+  const { user } = props;
+  const { SIGN_UP, SING_IN, USER } = paths;
 
   const login = (data) => {
     fetch("http://10.20.8.158:5002/api/v2/accounts/login", {
@@ -36,32 +44,41 @@ function SignInForm(props) {
       .then((data) => {
         console.log("Success:", data);
         setId(data.account.id);
-        user(data)
+        user(data);
       });
     return data;
   };
   useEffect(() => {
     if (!!id) {
-      localStorage.setItem('useId', id)
-      navigate("/user");
+      localStorage.setItem("useId", id);
+      navigate(`/user`);
     } else {
-      navigate("/signin");
+      navigate(`/${SING_IN}`);
     }
-  }, [id]);
-
+  }, [id,USER,navigate,SING_IN]);
 
   return (
     <div className={classes.form}>
-      <Diamond />
+      <div className={classes.icon}>
+      <span style={{fontFamily: 'fantazy'}}>Sign in</span>
+
+        <Diamond />
+      </div>
       <div>
-        <span>Sign in</span>
-        <span>Do not have an account?</span>
-        <a>SignUp</a>
+        <span>Do not have an account? </span>
+        <span
+          style={{ color: "blue", cursor: "pointer" }}
+          onClick={() => navigate(`/${SIGN_UP}`)}
+        >
+          {" "}
+          SignUp
+        </span>
       </div>
 
       <TextField
         id="dot"
         label="DOT"
+        style={{ width: "60%" }}
         type="text"
         value={dot}
         onChange={(e) => setDot(e.target.value)}
@@ -69,6 +86,7 @@ function SignInForm(props) {
       <TextField
         id="email"
         label="E-mail"
+        style={{ width: "60%" }}
         type="text"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -76,6 +94,7 @@ function SignInForm(props) {
       <TextField
         id="password"
         label="Password"
+        style={{ width: "60%" }}
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
@@ -92,12 +111,11 @@ function SignInForm(props) {
       >
         Sign In
       </Button>
-      <span>Main Page</span>
       <span
         style={{ color: "blue", cursor: "pointer" }}
         onClick={() => navigate("/")}
       >
-        Click Me
+        Home Page
       </span>
     </div>
   );

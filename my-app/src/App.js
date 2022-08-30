@@ -1,7 +1,7 @@
 
 import './App.css';
 import HomePage from './components/homePage/HomePage';
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import {  Routes, Route, useNavigate } from "react-router-dom";
 import SignIn from './components/homePage/auth/SignIn';
 import SignUp from './components/homePage/auth/SignUp';
 import Main from './components/worktable/Main';
@@ -14,9 +14,9 @@ import paths from './constants/paths';
 
 function App() {
   const [value,setValue] = useState("");
-  const [data,setData] = useState({});
+  // const [data,setData] = useState({});
   const {HOME,SIGN_UP,SING_IN,USER} = paths;
-  const check = localStorage.getItem("useId")
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function App() {
         setValue(data);
       });
      }else{
-      Navigate("/")
+      // navigate("/")
      }
   },[]) 
 

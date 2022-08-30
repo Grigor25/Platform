@@ -1,5 +1,7 @@
+import BasicTable from "./ListTable"
+
 function List(){
-    return <div>List</div>
+    return <BasicTable />
 }
 
 export default List

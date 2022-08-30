@@ -7,7 +7,7 @@ import AddTrailers from "./AddTrailers";
 import Boards from "./Boards";
 import Drivers from "./Drivers";
 import List from "./List";
-import MyAdress from "./MyAdress";
+import MyAdress from "./MyAddress";
 import Tractors from "./Tractors";
 import Trailers from "./Trailers";
 import UserFriendly from "./UserFriendly";
@@ -26,11 +26,11 @@ const useStyle =createUseStyles(() => {
 
 function Main(){
     const classes = useStyle();
-    const {ADD_DRIVERS,ADD_TRACTORS,ADD_TRAILERS,BOARDS,DRIVERS,LIST,MY_ADDRESS,TRACTORS,TRAILERS} = paths;
+    const {HOME, ADD_DRIVERS,ADD_TRACTORS,ADD_TRAILERS,BOARDS,DRIVERS,LIST,MY_ADDRESS,TRACTORS,TRAILERS} = paths;
     return <div className={classes.main}>
         <UserFriendly />
         <Routes>
-            <Route path="/" element={<WorkSpace><UserProfile /></WorkSpace>}/>
+            <Route path={HOME} element={<WorkSpace><UserProfile /></WorkSpace>}/>
             <Route path={ADD_DRIVERS} element={<WorkSpace><AddDrivers /></WorkSpace>}/>
             <Route path={ADD_TRACTORS} element={<WorkSpace><AddTractors /></WorkSpace>}/>
             <Route path={ADD_TRAILERS} element={<WorkSpace><AddTrailers /></WorkSpace>}/>
